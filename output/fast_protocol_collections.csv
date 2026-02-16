@@ -1,0 +1,10 @@
+entity,unique_wallets,total_activities,stat_totalRecords,stat_uniqueUsers,stat_byEntity,stat_byChain
+azuki,30,30,30,30,{'azuki': 30},{'1': 30}
+doodles,30,30,30,30,{'doodles': 30},{'1': 30}
+hype_holder,200,1000,492,491,{'hype_holder': 492},{'999': 492}
+hyperliquid_activity,200,1000,552,550,{'hyperliquid_activity': 552},{'999': 552}
+hypurr,29,29,29,29,{'hypurr': 29},{'999': 29}
+moonbirds,5,5,5,5,{'moonbirds': 5},{'1': 5}
+pudgy,53,53,53,53,{'pudgy': 53},{'1': 53}
+test,2,2,2,2,{'test': 2},{'1': 2}
+yuga,16,16,16,16,{'yuga': 16},{'1': 16}

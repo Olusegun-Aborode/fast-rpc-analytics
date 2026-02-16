@@ -1,0 +1,1992 @@
+{
+  "total_value_usd": 400974.2084373772,
+  "avg_value_usd": 1211.4024424089946,
+  "wallet_balances": [
+    {
+      "address": "0x8629e41e09a6943f183d2484a685610a74ae44ec",
+      "balance_usd": 0.12251470703681151,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x302ba46ed552f2fc1c781f9707ea0531facd949a",
+      "balance_usd": 0.11478452709806285,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0xe8ec8f9a9dc738cb4ebed743f4b55a60bb39d7ca",
+      "balance_usd": 50.214853243743036,
+      "token_count": 22,
+      "success": true
+    },
+    {
+      "address": "0x3c68b13455b395f90a09c0ff7b43f2615d12c988",
+      "balance_usd": 2753.994197487819,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0x3a61f5ce034274d7eeb38058a4bc941d653933ea",
+      "balance_usd": 1.7495706729942782,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x32babb97811735400dd1e2fab0b7d93b069c3f40",
+      "balance_usd": 1288.6897912876095,
+      "token_count": 30,
+      "success": true
+    },
+    {
+      "address": "0x15e424aa85ba411277ee9d7f868fffc95064c2ca",
+      "balance_usd": 2388.283313299289,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0xd695a06b2a430e351e7ef94506ed6935f6f35eaf",
+      "balance_usd": 72.54246357838763,
+      "token_count": 41,
+      "success": true
+    },
+    {
+      "address": "0x328283d917f5d61ac73953bbf3810960eefc399d",
+      "balance_usd": 18.112579111382402,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0x136e409d3c13dbf044d8eca5e6c22cb0a7915500",
+      "balance_usd": 1686.530232802182,
+      "token_count": 94,
+      "success": true
+    },
+    {
+      "address": "0xe44b9d5453a567cfffc114e81bdbfcb08d823100",
+      "balance_usd": 0.8910787399889143,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x5a13434e6416798ee8162d994c4f591f1c12bf50",
+      "balance_usd": 45.22406755505066,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0x52fb778d1f5f4b4c45688336d9007d5774bc8eb9",
+      "balance_usd": 1724.30594194619,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0x59dfbee34004f7ff37911fe59c04bc78df06c53a",
+      "balance_usd": 3.7980238308371903,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0xa44c3433a17b1c564893ce25a1aee9bb60001935",
+      "balance_usd": 2.942868894,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x7daec7872ad4bbeeb2a15fc618413067242491a6",
+      "balance_usd": 372.68081630271547,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0x7e58d735b4e7fac5b6105ddd998f51208157d2ad",
+      "balance_usd": 602.7520565023186,
+      "token_count": 40,
+      "success": true
+    },
+    {
+      "address": "0xbec15d04ac41da44fddbb0d27393c9664d232200",
+      "balance_usd": 3.343469449244016,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x6c51ead5552443d5701d7f9fe0cc71aab3527910",
+      "balance_usd": 74.10367928506406,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0x7753d5553fb06d75d16bdb802c10c9e6d59fdaf4",
+      "balance_usd": 5.960043305604817,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0x9ac79ae44c63c664a714c77d9cc1a78c940540bd",
+      "balance_usd": 1386.1176400560555,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0xb6481fc5a7c839062c2540fd4db98837a9de21c4",
+      "balance_usd": 2.2719394243608257,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xc08fa23baa3a5282b27c8b1358b7e941f77fb20e",
+      "balance_usd": 26.82032434628755,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0x962c95d5c0fc2a3eed9ebcf38784a73a930b1160",
+      "balance_usd": 1.1100176757225078,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0x0136b00be94ed8ea798f40e37135596337305461",
+      "balance_usd": 208.11167529416878,
+      "token_count": 47,
+      "success": true
+    },
+    {
+      "address": "0x2c1861481a47baf9298a18a093e936d681d1af27",
+      "balance_usd": 0.1749438617229932,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x62016b340492521827fc3837571553227d54481d",
+      "balance_usd": 8.301421745756238,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0xe6268b56f6e2f949aa8521893c290a348f929ca1",
+      "balance_usd": 17887.969075679863,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0xd85388e22748d0b88365e6072b491da5921f1729",
+      "balance_usd": 37.3243961518983,
+      "token_count": 22,
+      "success": true
+    },
+    {
+      "address": "0x2d8d1c6f4fb232ae9be246a9cdeb807a6519edb3",
+      "balance_usd": 3142.881536978558,
+      "token_count": 29,
+      "success": true
+    },
+    {
+      "address": "0xc6c827d294a8102c2fee976d340bd454758073c4",
+      "balance_usd": 0.5361096827608547,
+      "token_count": 34,
+      "success": true
+    },
+    {
+      "address": "0x41a3f821c79e69b4c24ce9be326404fd9f282a74",
+      "balance_usd": 0.5906235815898415,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0xe0bba9ef3bd7fb5e875ec21f72ed5e021f68195d",
+      "balance_usd": 45.150076545927554,
+      "token_count": 32,
+      "success": true
+    },
+    {
+      "address": "0x2190f15a37a2c1fc7b6561655e1d0165d4813c22",
+      "balance_usd": 0.7220169851690095,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0x3eea372582e72f1d189ce02e7a65968015622a01",
+      "balance_usd": 112.79125879452958,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x425edc661ccfea6b2d1953068e6ad0c4e55093df",
+      "balance_usd": 655.915934777308,
+      "token_count": 42,
+      "success": true
+    },
+    {
+      "address": "0x89b0fb6eb9d83e6e50915aba19b92fc80a58f065",
+      "balance_usd": 39.204898713898984,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0x201a86a6d26a96af49ebb1da390d12aeaa7f906e",
+      "balance_usd": 2227.9644528826934,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0xcb0a40494c6cfc87e5d0dd4207501764954619cd",
+      "balance_usd": 87.07717870270467,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0xd6bdb75b0d08d8f8693fdcffefcbf620c20fb0a5",
+      "balance_usd": 2.0540202092967053,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xedf8168a3ecf26c80f1e17d777210f8b92474480",
+      "balance_usd": 91.28671257722519,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0x47bff18e462912ab61a465b2bc229e3857491aa6",
+      "balance_usd": 917.4645848076071,
+      "token_count": 36,
+      "success": true
+    },
+    {
+      "address": "0xca288359ba6319c7e7c7377a670183acb3781cda",
+      "balance_usd": 13016.188524186136,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0x951e1195f5b49c09779297012f96b9a759db75e4",
+      "balance_usd": 356.878115602513,
+      "token_count": 43,
+      "success": true
+    },
+    {
+      "address": "0xdb25ff796e694e2f6e11438fd53a0813dee3d5a0",
+      "balance_usd": 104.21092376664929,
+      "token_count": 18,
+      "success": true
+    },
+    {
+      "address": "0xd39f8bc4e02ae80cb08320d7a9cf6e038e3e8adc",
+      "balance_usd": 26.653141245781406,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0xc5512becde4c386197e5ae75a6a9e8ac1c39dc29",
+      "balance_usd": 95.40018663321526,
+      "token_count": 37,
+      "success": true
+    },
+    {
+      "address": "0xb6688a115bd1f44e39eb191bf8d44b5b9f011b9d",
+      "balance_usd": 86.17644569770701,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0x23ebd54fd65825e06a6e5aacc1a0b523bfeb748e",
+      "balance_usd": 574.7608280288708,
+      "token_count": 34,
+      "success": true
+    },
+    {
+      "address": "0x8f791c0592db171d84167d10baa70fd6dd26705c",
+      "balance_usd": 114.64570638469725,
+      "token_count": 37,
+      "success": true
+    },
+    {
+      "address": "0x302df6dbad504c75a246e4e3561a6e03ccf5eefc",
+      "balance_usd": 88.55928597684094,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0x2d9cbc4ecfbd1b8f66aa798fd51585ae058daa8b",
+      "balance_usd": 6.273246178327855,
+      "token_count": 18,
+      "success": true
+    },
+    {
+      "address": "0x4bcb03a8248a4824d7c0c0f64fc834bab2b348d2",
+      "balance_usd": 2757.119557994508,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0xe9f9e6a10115c1ca4a90a1ba5d3235e6389cb216",
+      "balance_usd": 2217.874456099095,
+      "token_count": 25,
+      "success": true
+    },
+    {
+      "address": "0x5d864b0c42531fb2d0fd4a855a410bd0063f4576",
+      "balance_usd": 459.66659887299215,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0x87f12b62542375f4e45b7c1bd85850742782af08",
+      "balance_usd": 56.61865827656577,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0xe1b8ebfc9196fa4341d564b9d8b8df81f9e9d0ed",
+      "balance_usd": 15.947608318675554,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0x130171e3eeb902359aadbb4ea91a3db86c517dfd",
+      "balance_usd": 1.6154186003767816,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0x89f7d3c783e2ec7992d8ba17ca0e3cf0eb4b1c17",
+      "balance_usd": 26.870913289608165,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xa6cca164c229c2d160a5dca5f1f1a1a7d18052b9",
+      "balance_usd": 43.44813656897042,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xb0131f9775be0d4ed66cc475b3c515a7e1f5d26a",
+      "balance_usd": 61.57105601794769,
+      "token_count": 30,
+      "success": true
+    },
+    {
+      "address": "0xdb656ae889306821fcd8b0256b4f66bced538d43",
+      "balance_usd": 6.710136729347894,
+      "token_count": 36,
+      "success": true
+    },
+    {
+      "address": "0x2b467a6a63d28375e4f213b5513b1fc68f3d7da8",
+      "balance_usd": 397.4422078243143,
+      "token_count": 34,
+      "success": true
+    },
+    {
+      "address": "0xc0ad5d21ff19a4e85b016bfd53ced8842995c151",
+      "balance_usd": 394.81656378059995,
+      "token_count": 94,
+      "success": true
+    },
+    {
+      "address": "0x622fffe61d52ca3cd9df1416c553e511e48eaeca",
+      "balance_usd": 16.794491353130915,
+      "token_count": 50,
+      "success": true
+    },
+    {
+      "address": "0xbea5b7a623217f0d5244cabed66bbff65e55e8b6",
+      "balance_usd": 2734.4183351748343,
+      "token_count": 48,
+      "success": true
+    },
+    {
+      "address": "0x1ce0d359bd8b167a4c51dbe4cd8da95e2ff03265",
+      "balance_usd": 19.356299409579275,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x864d69e84bcbf88dc63c0333501b1db5d3fdbf28",
+      "balance_usd": 124.82996595650657,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0x659082a1b071fe769fd4fc8acc3c056986375081",
+      "balance_usd": 458.1640841103933,
+      "token_count": 55,
+      "success": true
+    },
+    {
+      "address": "0x841203db81e2278107c829933defa65bd11e54a2",
+      "balance_usd": 68.71940685433016,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x3cff25215e85b9ca0c07a7c1ba8643319be80aa8",
+      "balance_usd": 494.98110197840407,
+      "token_count": 43,
+      "success": true
+    },
+    {
+      "address": "0xb2e1462847e6244f9931915ea2294005643b4861",
+      "balance_usd": 867.2487159679318,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0xcc70d29f9f37424ee2d02fa37506e94a0c0b740a",
+      "balance_usd": 160.88292924695529,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0xe95767808647552f64753fd661dd539c803ae74e",
+      "balance_usd": 135.94328308421981,
+      "token_count": 28,
+      "success": true
+    },
+    {
+      "address": "0x5dd6fd6f17b550f45129e4e62bf4e7bd7e05f6d0",
+      "balance_usd": 766.2491537483564,
+      "token_count": 72,
+      "success": true
+    },
+    {
+      "address": "0xdfd77a848618b3428c79790b5222b85c2adfcfe5",
+      "balance_usd": 259.0660836928141,
+      "token_count": 92,
+      "success": true
+    },
+    {
+      "address": "0xcf00630b45a6d98f9680bcfcb94d21e30b05a429",
+      "balance_usd": 33.06141157347617,
+      "token_count": 49,
+      "success": true
+    },
+    {
+      "address": "0xa60f492f5d52e0461b55d37ba4ce95c9d5eff62b",
+      "balance_usd": 1148.4792980180866,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x16d475e61136d3a342318193c98e67bd0f52e8db",
+      "balance_usd": 551.8671982678826,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0x187cec2c0f397dfc2782bd1e73885af8058d5513",
+      "balance_usd": 2947.7721615280966,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x7f04c4387423c5460f0a797b79b7de2a4769567a",
+      "balance_usd": 24.437161366225034,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0x671be92d915c712c57f122851f418f19e2fb4213",
+      "balance_usd": 47.65316281823646,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0x4943407105999e3e97efa2035f5cbc64d72581c6",
+      "balance_usd": 391.9417114784114,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0xc1a864ac8622a18ba480c23bccf716df0124ab59",
+      "balance_usd": 113.54740299685324,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0x4d16cb32946119f4f65e071364097bc34117d1cf",
+      "balance_usd": 2.1249335411089154,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x464f7b5340f48a88582a8e70e68e021dd19bf32c",
+      "balance_usd": 148.85360304635904,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0xbb78bd00b2f12c8263ec27a9872c028a2e48990e",
+      "balance_usd": 56.072957937174536,
+      "token_count": 29,
+      "success": true
+    },
+    {
+      "address": "0x1cee32876cf66e90c0aab0789cd4de6d7993cd34",
+      "balance_usd": 82.2732384094426,
+      "token_count": 367,
+      "success": true
+    },
+    {
+      "address": "0x2a096a904cc891f349d59b781d451e6a098ea5ec",
+      "balance_usd": 201.08014472741294,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0x8bb72946f55eba046a58d27b531266a7e681e54b",
+      "balance_usd": 0.622929234822779,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x391a3ea52c4a9f04be6900c3fd057dd9676c72e1",
+      "balance_usd": 89.11324201810321,
+      "token_count": 36,
+      "success": true
+    },
+    {
+      "address": "0x50022c9b7323e05f315cd8af311fe1a4f8023173",
+      "balance_usd": 2435.8809454342854,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0x11ce1e59746ece3970e8e1ce2bd62e3b6c2db368",
+      "balance_usd": 6.602107271278058,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0xe7968cfa660fbf62b68a614aad3bfd92185c21f6",
+      "balance_usd": 406.4064556854209,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x2435ed340454ecbbcafdd00985766f8632d3a78a",
+      "balance_usd": 30.322544411563157,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x96095d01d40b4f8c6e33a7d4f888cc2d320537cc",
+      "balance_usd": 22.377591326277653,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xf60920b30ca2e978180a12664769da39d18e4e5e",
+      "balance_usd": 3.291261931993753,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0xa1268a91ba4841ea9105a9370758490d762f21f2",
+      "balance_usd": 26.107776575554073,
+      "token_count": 18,
+      "success": true
+    },
+    {
+      "address": "0x4b167447f2ccdb1b2fdc3fafab555806ffbbe086",
+      "balance_usd": 2181.810549273583,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0x54bb17b14e45c16c46d2338a159a320b7e1dc45c",
+      "balance_usd": 4.444715450172462,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x70cc711c52d00d7229b89271e885b1716903c649",
+      "balance_usd": 662.4675674352036,
+      "token_count": 34,
+      "success": true
+    },
+    {
+      "address": "0xe3b72489968f11c15282514f33df24634440393f",
+      "balance_usd": 78.79154053228122,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0x1ed924cef3b93a63d4d9d808513fbdc7bf64a552",
+      "balance_usd": 1253.304118815569,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0x9c016d9a1ce53658f7a975f796735b4e010013bc",
+      "balance_usd": 197.68772518895258,
+      "token_count": 66,
+      "success": true
+    },
+    {
+      "address": "0x8c7a64a8b3fdf64e7dcd4a44611e8edb4214f27f",
+      "balance_usd": 120.34453201465246,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0x67b120cb8cb32ab70d4d88a92f65823d9d450800",
+      "balance_usd": 2.816810882880126,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0xb41e31a4ddc1c3ed12ee1ade86f01ff1e3f9fb27",
+      "balance_usd": 866.9297001056239,
+      "token_count": 87,
+      "success": true
+    },
+    {
+      "address": "0x9076d31f81512e040cc07cfe2031cf251236a741",
+      "balance_usd": 1.682207437260628,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0xaf2e919b59734b8d99f6bc1f62dc63d6519d14bc",
+      "balance_usd": 1351.5921222049265,
+      "token_count": 36,
+      "success": true
+    },
+    {
+      "address": "0x91d10bed0f7fc6846826f256f43f649cf7b3ba53",
+      "balance_usd": 0.000686882839185581,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0xa3c5c975610149ea976e65abfffa5584cd00c177",
+      "balance_usd": 386.3512336214328,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0xa30e48c7826eed00223224dfde038347b983f0f1",
+      "balance_usd": 3219.847159362762,
+      "token_count": 59,
+      "success": true
+    },
+    {
+      "address": "0x1090562f3a57f7c56411d6f784df65959aa90375",
+      "balance_usd": 56.40659028926432,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0xde8b953eafd05c63d12547bce980117267f38215",
+      "balance_usd": 896.8847677092183,
+      "token_count": 25,
+      "success": true
+    },
+    {
+      "address": "0x68230e37b83fd2b586b51f3e58f6ed4a0689a4af",
+      "balance_usd": 161.9767547004901,
+      "token_count": 29,
+      "success": true
+    },
+    {
+      "address": "0x10044bdfff0871f147c943e5b6c4be5d1def03f1",
+      "balance_usd": 34.77700837928026,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x0ff75354b403beaee5122a9bca41e82d1afb5171",
+      "balance_usd": 40.41080520739329,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0xb7855e25410f0531e82ea3692b7f1c55f25182b3",
+      "balance_usd": 0.06215941879691956,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0x30878ab35f39392081faecaf61c6d12c4e7cb799",
+      "balance_usd": 71.59838588749736,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x513c792bca50f785cb4eb53e4d71f4fc6320bf4a",
+      "balance_usd": 290.32723725930333,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0xf4e778e56895362bf829dd2fdb339080d14817b9",
+      "balance_usd": 0.306501239720321,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xadab4df3d8fb2927f59487c2fd90df17a3ae20ce",
+      "balance_usd": 1047.2719421581571,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0x2a827781ae171d5c84ddbf11251041ab319ca682",
+      "balance_usd": 5.576229882148205,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0xabbe2a994d025d9f4ddd89fdccedb222df3d6195",
+      "balance_usd": 992.8421803473017,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xf80c1fa47b1050fd55bb08aed188177763f84f24",
+      "balance_usd": 0.15308382056805786,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x6dc37f889f1202bc57eac51d1d35650c22fb6d1a",
+      "balance_usd": 28.159511882690968,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xcd66a71abd5fdc5e2515b7a8119a9498ddb104d1",
+      "balance_usd": 1.22029693898099,
+      "token_count": 19,
+      "success": true
+    },
+    {
+      "address": "0x4d4ccb7240ec0c306fa857f4b5b4514c6e45af37",
+      "balance_usd": 4.678020768164605,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xb11dcbacc82200721ecceeefb4d80233355f6fe0",
+      "balance_usd": 801.1907063647167,
+      "token_count": 47,
+      "success": true
+    },
+    {
+      "address": "0x1a8028927383a0665b62b4aa6eefd5dd66cb5a38",
+      "balance_usd": 537.9370821248016,
+      "token_count": 44,
+      "success": true
+    },
+    {
+      "address": "0xb9911c4bfedc64224067cd2b829030bcca0b8eb9",
+      "balance_usd": 2.529098347957005,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xaaadb2b10a4f07ea28ef455b676ca1138934f676",
+      "balance_usd": 15.314843819525285,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0xc758921302a979fd28f6dba6b95276c93e6ade07",
+      "balance_usd": 308.60976794885516,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0x795dc1e52d5409d2b39612435617c52c5cc80905",
+      "balance_usd": 5628.484953895732,
+      "token_count": 144,
+      "success": true
+    },
+    {
+      "address": "0x1ebdd6f7fd274796f45d6d78ae8a8f06c2742a58",
+      "balance_usd": 115.58224946323901,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0x096b405c3a81e68235d43fec2b41c28cb7248f30",
+      "balance_usd": 1282.4842912325403,
+      "token_count": 35,
+      "success": true
+    },
+    {
+      "address": "0xb503d0467f26e8a8115465d5d4a906804616c720",
+      "balance_usd": 32.319708394177816,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0xea3b87f55974fabf28caa6fe90ee1751d6e276a3",
+      "balance_usd": 223.4349887098925,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x3dff6ff42951d4bd819e279c5c8d9ea6c2a263a7",
+      "balance_usd": 59.82358522475344,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0xb2c2a17df5fabed1b4ca9d6b0d19d7af51bdb58e",
+      "balance_usd": 48.81298525169454,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0x269bee69f22b7ff160c525460edbdfb5005853f2",
+      "balance_usd": 17.419238321879526,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0x77dd508fdff4d2b470fad59686fb784e197a0762",
+      "balance_usd": 1531.1925613574242,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x308d826a4f1defe825a9a18d25a3e3353ad84497",
+      "balance_usd": 17.0637166037101,
+      "token_count": 19,
+      "success": true
+    },
+    {
+      "address": "0x49d1978dce1a788a0e33ac59c004e5fee4093e95",
+      "balance_usd": 295.12909095145477,
+      "token_count": 61,
+      "success": true
+    },
+    {
+      "address": "0x36314c120e5beaabc04ba4409384ae26b79ef370",
+      "balance_usd": 1645.006597482879,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0x132af0452a9b8b61777421bf77c41fbbabf8527a",
+      "balance_usd": 445.05989404199306,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0x3d3b69457ce7e7998f19e85e018b5a296aed781e",
+      "balance_usd": 1485.986934865054,
+      "token_count": 69,
+      "success": true
+    },
+    {
+      "address": "0x656c22bb7d0b44d9f894fa8b47fb1623387f5e73",
+      "balance_usd": 8533.469017674382,
+      "token_count": 19,
+      "success": true
+    },
+    {
+      "address": "0x1fbe7279da134c53fa521f5ee65891948e775e17",
+      "balance_usd": 11002.625912723652,
+      "token_count": 98,
+      "success": true
+    },
+    {
+      "address": "0x422347ff0b827a43ca4637a48a04b42f469278f4",
+      "balance_usd": 163.44285775101346,
+      "token_count": 40,
+      "success": true
+    },
+    {
+      "address": "0xf14ddc04783a97fab02df5ffa4eb8b57998b3f98",
+      "balance_usd": 102.00027209102817,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0x32573ec9734a1054cd0e35f0e28314e688089138",
+      "balance_usd": 2285.2938788619085,
+      "token_count": 42,
+      "success": true
+    },
+    {
+      "address": "0xd76a059dccb63423d17f6161b55e2cfd9f8582a6",
+      "balance_usd": 7.7318218886538785,
+      "token_count": 28,
+      "success": true
+    },
+    {
+      "address": "0x234d5b323dd7bc124f814a8ba28dd884785093cd",
+      "balance_usd": 24.22746202459301,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0xdd041a10e9428d6cdf1c74e6d7c1f3077f5cbe20",
+      "balance_usd": 719.7108935701439,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0xc82b677ec9fdc397572348d305bf7f0ffac80ec2",
+      "balance_usd": 4853.884560208665,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xd463b53ae4116bdd0fe8fbf911ab4846fc7cdbee",
+      "balance_usd": 1.7180989629768906,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x86d55a7c9e70ba692b9b9b8460f354034f9ec896",
+      "balance_usd": 190.54589331574354,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0xdd161ba86de281892a4cf67c657f646750e0c1b5",
+      "balance_usd": 6.115666915656815,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0xf8807d90da57f827a2e86e846c53f93a1cd6c762",
+      "balance_usd": 89.90560717698085,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0x16a65da24a2ccb01a5df767ed417125223f4620a",
+      "balance_usd": 78.9674277104184,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x1b4c75a5397c983c38c987d872b4f407c1d97f50",
+      "balance_usd": 34.15156428095573,
+      "token_count": 21,
+      "success": true
+    },
+    {
+      "address": "0x52eff600e9a0317981c1e3ee882c4b6d6e053f5d",
+      "balance_usd": 8.96264961386912,
+      "token_count": 48,
+      "success": true
+    },
+    {
+      "address": "0x9fc319e0259de9d57aab2249e1792ab97db3a901",
+      "balance_usd": 2050.5477817123992,
+      "token_count": 21,
+      "success": true
+    },
+    {
+      "address": "0xacd7e2577a22b57b91e101885919501b9f9869ad",
+      "balance_usd": 239.7516804772788,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0x5bb8d3ccd40905ef571eb456f56856250c3accfb",
+      "balance_usd": 74.87501632075755,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0xb13d6e97ec5367bf7ea4ea7f1c4ab781b35c1830",
+      "balance_usd": 30.822569248358217,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0xce9b627fde0cc98f4221ad7b954517389a1c84d0",
+      "balance_usd": 23.223879389180603,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0x5ba5e30b05aa61cc6114292c1abaf9929d591965",
+      "balance_usd": 422.6692679461964,
+      "token_count": 29,
+      "success": true
+    },
+    {
+      "address": "0x860898f92f4c08448105be3472803dff82e65d83",
+      "balance_usd": 14.738180122357376,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x355c1cf73c2c1d0193b0dac92863d5f254a3e83d",
+      "balance_usd": 577.8225845841087,
+      "token_count": 62,
+      "success": true
+    },
+    {
+      "address": "0x83a2de08b26ab319fbd417af49e4dda97e1990c4",
+      "balance_usd": 176.62566577414884,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0x12b36dd2043c723543b44eebf0900764fb17a29c",
+      "balance_usd": 10.991604073604016,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0xbe88590088585ee8ba69650a2bad7348d5271db7",
+      "balance_usd": 237.28449642605298,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0xc1260b5f58b302e0acbc875de8100154a01e9d69",
+      "balance_usd": 925.6059176695496,
+      "token_count": 25,
+      "success": true
+    },
+    {
+      "address": "0x31008b6ffa582257461ce193fdc07df260f5a26c",
+      "balance_usd": 25.070108119427992,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0x9c20b1ff36587334a72cb293028fcbf6a89111f8",
+      "balance_usd": 4.455581024076274,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xbf285d9ec176eb7e9e6bf46650690b0b117d03fd",
+      "balance_usd": 514.4390184137945,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0x35aaccd438041ce7aaa6ae1976bdc28fe77ded50",
+      "balance_usd": 1.853562329018294,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0xb7ecbf7070e3fbb20ae7ad431933895439f7f32e",
+      "balance_usd": 1.902027571092819,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0x4b15e7d0eba14497af84bc8f75b2a7f9aa2fba50",
+      "balance_usd": 1639.4443663257746,
+      "token_count": 53,
+      "success": true
+    },
+    {
+      "address": "0x10ff4dd9943f19b1372c01797d2d3cc96e914e22",
+      "balance_usd": 1.0911479385980793,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0x7a1bcd29ec7f19f470a20a910660811a2c3cb094",
+      "balance_usd": 1215.6409908022265,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0xd7685899f60a7aadf820288b33d51ff3d3cdb501",
+      "balance_usd": 4.130113614962473,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0xdf983a1266369d4437b4eca7c7b743ae1996a526",
+      "balance_usd": 2846.626207635872,
+      "token_count": 48,
+      "success": true
+    },
+    {
+      "address": "0x6a3df76bb2b27f1830b65b13df2546de74651e11",
+      "balance_usd": 24.030527267906507,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0x15c06fa4a7c61455ace8cefe0c6c18fb17aa8d05",
+      "balance_usd": 963.8998617706472,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0xe7bec8597d17ac970bea3e009bb034eb9dfa40be",
+      "balance_usd": 1850.3924883219283,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x5052db20d9e9b929a90b9297f8f0863b398080a5",
+      "balance_usd": 14.410398771864642,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0xcd9869d32d6c405a704fb0e9714c239f8f80c0c6",
+      "balance_usd": 342.47193432811144,
+      "token_count": 37,
+      "success": true
+    },
+    {
+      "address": "0xf553c63b8c2add2299f96bee793780d63bc7daf9",
+      "balance_usd": 12.822279634568261,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x0b07f3c09849d8e1618a08003c5aa0e55b9b861a",
+      "balance_usd": 35.07427562101634,
+      "token_count": 25,
+      "success": true
+    },
+    {
+      "address": "0xcb7bdb7b9ff19dda515d23a6d283cc39d4651452",
+      "balance_usd": 91.63989972901012,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0xd4105ee862023c362b10c8eacbd54916c22b96da",
+      "balance_usd": 4.322227813850238,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0x7e8e89b11a2f4bc51b10f982bc2e83a340a6c6b7",
+      "balance_usd": 14.642634772549282,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0x40a0086369bc0c4a8d8aaed28b327fb8a4f6cb45",
+      "balance_usd": 846.9480241235015,
+      "token_count": 141,
+      "success": true
+    },
+    {
+      "address": "0x6e44c0efeca886b546bc2aa85118094b83b87297",
+      "balance_usd": 126.73299100471235,
+      "token_count": 125,
+      "success": true
+    },
+    {
+      "address": "0x000007cc15b4b01aecf248bf46302ac02341e11f",
+      "balance_usd": 3.5082103585099023,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0xc3ed3a515d666b643eda995aaaeb04622ba06716",
+      "balance_usd": 8006.407936753788,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x5972efc4b2dd3d9eaee853973bc3d65a1a5e989c",
+      "balance_usd": 1.9589939208865728,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0xad773aa6de26e9193c953bcfe5f30878bf711a18",
+      "balance_usd": 14.81398611352433,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0xee88755ff6dc6ec00664e610a475e616569b90cc",
+      "balance_usd": 1025.478494239823,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0xd4bbbfd8297963324098824da15c901026f0593e",
+      "balance_usd": 3.447210786722036,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0x862a45a42be7069ee7b82df21c182570fef8b95e",
+      "balance_usd": 53.17487275363349,
+      "token_count": 153,
+      "success": true
+    },
+    {
+      "address": "0x0b0f9f02d9aef778433dea88c4bec341d6c86834",
+      "balance_usd": 757.583502347986,
+      "token_count": 95,
+      "success": true
+    },
+    {
+      "address": "0x7a190eb8cddabcfd8c5e0d94fa54f6d958aaad83",
+      "balance_usd": 3.962426001068504,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0xcaa2d352a4afd32ec09779439011c8bfc6da5d03",
+      "balance_usd": 317.0178393723373,
+      "token_count": 29,
+      "success": true
+    },
+    {
+      "address": "0x944e3661da24cb81a6cd6f9ac4bd821864cd2033",
+      "balance_usd": 143.46306749327306,
+      "token_count": 34,
+      "success": true
+    },
+    {
+      "address": "0x7c0e4a423c2052463d2e9858d1d3e327b16c4ead",
+      "balance_usd": 0.7917222898843156,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x8dc7b6a1cb14b663b88fb19178e65984f8d8bc80",
+      "balance_usd": 3.745875566721512,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0x2e328736924a5f5969d2c4e86ebcc57ab684f6a5",
+      "balance_usd": 1288.025688079167,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0x0b9430d5b83171fae65aef231d54e35150291358",
+      "balance_usd": 27.05784568801812,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0x4b3f373ddacb8b1171442a4ddfb8e9107650ef21",
+      "balance_usd": 91.51594805412128,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0xdf32738691a1b5e7b22013003ee6712b6ddda638",
+      "balance_usd": 7.09946938926627,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0xd52dc3de65efa3aaa936ed80cac1bd2c76aab027",
+      "balance_usd": 4160.235536612934,
+      "token_count": 21,
+      "success": true
+    },
+    {
+      "address": "0x3addb670e8f242749779c16e0ecf1c4c99194627",
+      "balance_usd": 60.26384315280894,
+      "token_count": 18,
+      "success": true
+    },
+    {
+      "address": "0x0c43d79baeba1acb896b4e35f02615eb25c3e4aa",
+      "balance_usd": 3.9352049966226765,
+      "token_count": 21,
+      "success": true
+    },
+    {
+      "address": "0xbbd8d5900be1112ff9388a4d9a79b4e61465900f",
+      "balance_usd": 19.159968636064466,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x5d84ea0c0f70911ccd81e7655734335e35479f7e",
+      "balance_usd": 4.0350703266683405,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xeea8a331f1633aae3b34a3a1a2cb6da180146ec7",
+      "balance_usd": 0.0026832948528755767,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x6e52d621d24bfeadff41d9b6a405d8f47f924cb0",
+      "balance_usd": 27.953881195311574,
+      "token_count": 4,
+      "success": true
+    },
+    {
+      "address": "0xa886135fb4ed36bc0dab295c0fde3dfcf516adc3",
+      "balance_usd": 4.9986494912591315,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0x2f8b2a9b626c68e16564269d40f37e707c72eb0e",
+      "balance_usd": 89.46916341869071,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xb412a1c70088468fc271e0a1606547f49133d8b8",
+      "balance_usd": 19.67582374505202,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0xdfa88bcbd03f891d216bee0df23ff98f451ecd5b",
+      "balance_usd": 0.12370783967790017,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0x8726220e3599f58dd1b6edb3f510c3042516e292",
+      "balance_usd": 321.7314432749044,
+      "token_count": 40,
+      "success": true
+    },
+    {
+      "address": "0x91c3b66eb1e74adcce0954aaaca7742e3e3a9552",
+      "balance_usd": 19.420035652740374,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x3cf21235c193ddc86997f1488df47eee7834cae3",
+      "balance_usd": 108.7394661826489,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0x2b23e4e377f2494955089040c1d56a116cf55956",
+      "balance_usd": 111.0324191147425,
+      "token_count": 28,
+      "success": true
+    },
+    {
+      "address": "0x56360f479cfa69145184a73f64023b04c631e68a",
+      "balance_usd": 986.4553580346909,
+      "token_count": 47,
+      "success": true
+    },
+    {
+      "address": "0xdd8916e976ae5b1e4010286e22982941757b8882",
+      "balance_usd": 4.821283009257134,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0x3494f17c2a3b18b298e40abd37e9d2e8639a64e6",
+      "balance_usd": 0.7654185339581796,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xa417100ddcd35787e6c0598e63db45ef5ecca567",
+      "balance_usd": 118.59466721106358,
+      "token_count": 98,
+      "success": true
+    },
+    {
+      "address": "0x27d9358c788c1e5d9d59ecb7193f6d1c7305da45",
+      "balance_usd": 7.088792996378713,
+      "token_count": 16,
+      "success": true
+    },
+    {
+      "address": "0x828ae2080d961cfff81e418089f1d01c08e6713f",
+      "balance_usd": 2121.5497946251685,
+      "token_count": 50,
+      "success": true
+    },
+    {
+      "address": "0x8a9a3519129b68c80a765f8a6cb17a71d5da04ce",
+      "balance_usd": 11.86697805988533,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0xb3b4e55b9f9d401d9cfc54e06d5665861c11f324",
+      "balance_usd": 6.823020109859424,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0xfddd8e89dfb65fe2da8e907939a281135ef3802d",
+      "balance_usd": 239.13430596659933,
+      "token_count": 31,
+      "success": true
+    },
+    {
+      "address": "0xd3870fca28d587872864a4481bd495dd22c7645c",
+      "balance_usd": 1.0546486270807813,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x3ac0c0c31037818b90f9fb28b2011b2a4d9f0f86",
+      "balance_usd": 70.14709515926259,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x6418e80418b6d14fbb4247b5772923319eebbdf7",
+      "balance_usd": 66.24044200292997,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0x6cef87a7055d020feac1615e4e1667586d1e8009",
+      "balance_usd": 101.40102518341831,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0x5973b426c616af28773d7a1457bd645a220ea79a",
+      "balance_usd": 956.7516783484766,
+      "token_count": 30,
+      "success": true
+    },
+    {
+      "address": "0x6a780c771281322c8e0bbab55b935c1bb70f66ec",
+      "balance_usd": 1260.7014454499495,
+      "token_count": 31,
+      "success": true
+    },
+    {
+      "address": "0x65ae53001b18b53ac85d7c2935e58ecd9a302bfa",
+      "balance_usd": 454.1246343162549,
+      "token_count": 33,
+      "success": true
+    },
+    {
+      "address": "0x6d9eb6c99445ac37411765be615ba4c6d63d7000",
+      "balance_usd": 111.01221951377066,
+      "token_count": 32,
+      "success": true
+    },
+    {
+      "address": "0x41514e4e598948edaff2432b1d3810f2d1058165",
+      "balance_usd": 2.5846511926813562,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x48189f4d0cf7177895e024301f685eff3e24c992",
+      "balance_usd": 22.92735543214427,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0x8fb9afdcc074599d86327b731f47ffa5375823a9",
+      "balance_usd": 54.09849704598084,
+      "token_count": 60,
+      "success": true
+    },
+    {
+      "address": "0x82e8a068ff0b7681108b52a3457420824f728196",
+      "balance_usd": 2379.492246347981,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0x312485c823e766401607f599bd2a052fba08b496",
+      "balance_usd": 197.40801533363285,
+      "token_count": 28,
+      "success": true
+    },
+    {
+      "address": "0x6b12481781547b44bace7e0250a372f03ec55328",
+      "balance_usd": 1238.9767120984022,
+      "token_count": 19,
+      "success": true
+    },
+    {
+      "address": "0x1a1ce8054976a38db8027f1e857478ea423a72e7",
+      "balance_usd": 5569.379973639881,
+      "token_count": 18,
+      "success": true
+    },
+    {
+      "address": "0xe27141ca33967be5df82b5cd33d93adf6e04d31c",
+      "balance_usd": 771.4437452268521,
+      "token_count": 59,
+      "success": true
+    },
+    {
+      "address": "0xd6946a5eee09fd167b9920d5647253ace122e9cb",
+      "balance_usd": 182.747092186758,
+      "token_count": 27,
+      "success": true
+    },
+    {
+      "address": "0x016d13e3e6e5704cfd472266f790c6d534c28dd8",
+      "balance_usd": 216.26312109031673,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0x3c173e3d1e6eaf8f697daea05a39ff0c067743a4",
+      "balance_usd": 650.079127392498,
+      "token_count": 41,
+      "success": true
+    },
+    {
+      "address": "0xcd6a6aaff1233cecf294d1de86c79fb90f5db24c",
+      "balance_usd": 4893.255587199617,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x807edc9cca4620e59b6919cf51b699ec6a2bde55",
+      "balance_usd": 144.20701682785716,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0xe8867aff523665619da1e5a30d0090bdc391d174",
+      "balance_usd": 10.317913384166605,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x5c051c0ff69b6f5fdd47e847eb370dd48726ec4d",
+      "balance_usd": 2365.689239575638,
+      "token_count": 40,
+      "success": true
+    },
+    {
+      "address": "0x75e70040aa225ba61fd5df41add5ad716a85aa96",
+      "balance_usd": 106.63201259683659,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0xca0b196212e22927177aa22650d29b5fc65ff3f5",
+      "balance_usd": 3.571460860138158,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0xc507667921e126c1bd12fda8b1782da9995ae9ea",
+      "balance_usd": 0.012071891030379365,
+      "token_count": 1,
+      "success": true
+    },
+    {
+      "address": "0x502ceaecfbdf1997f67d284b288e98c3fbbd1ea6",
+      "balance_usd": 12.520422083601717,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0x4c4df27375fbaf0d1ed439b96e2ebd1b6fb67fdd",
+      "balance_usd": 51.16750208960568,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0x329752d18c51df5b182ad445619cb4028b1fa790",
+      "balance_usd": 94262.69588640885,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0xa67144634230577b94d1545ca115f605ac800e21",
+      "balance_usd": 590.9661898654172,
+      "token_count": 45,
+      "success": true
+    },
+    {
+      "address": "0x01004bea6919b67c1475756ea75019f3bdc40679",
+      "balance_usd": 2343.3967097883096,
+      "token_count": 76,
+      "success": true
+    },
+    {
+      "address": "0x7febad278b323419e3b3e7077e2c7a9510622cc6",
+      "balance_usd": 54.316903849037516,
+      "token_count": 25,
+      "success": true
+    },
+    {
+      "address": "0x0a018339491b0684d4313779d0706246c00d985d",
+      "balance_usd": 3.262286630703173,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0x4095576446e7619608fceb14d225dec9f096b3ec",
+      "balance_usd": 230.1709487048559,
+      "token_count": 39,
+      "success": true
+    },
+    {
+      "address": "0xf834d652a8ccc2337f5b6e9718cd1725f082ac3f",
+      "balance_usd": 3.975121441984462,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0x5ec5c2468674a5d10db93db588fbff5d8da2fdc1",
+      "balance_usd": 70661.05811243984,
+      "token_count": 31,
+      "success": true
+    },
+    {
+      "address": "0x662a7c5cfca929dff1c72e0bc044fa647dd233ed",
+      "balance_usd": 1247.6358972610476,
+      "token_count": 136,
+      "success": true
+    },
+    {
+      "address": "0xe2c4569265f702579f11849c1d261ebe12566291",
+      "balance_usd": 1346.4693456052478,
+      "token_count": 24,
+      "success": true
+    },
+    {
+      "address": "0x2fd962123d9c2de40606a6aafcf9846fe95170af",
+      "balance_usd": 0.9864432037743267,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0x98b69d0b81fb1966ebe0af76789425706e5afe7b",
+      "balance_usd": 659.7928185058063,
+      "token_count": 79,
+      "success": true
+    },
+    {
+      "address": "0x84fb4d0598650bd9ee13a8cab555baa71dedeb4c",
+      "balance_usd": 216.4414633104075,
+      "token_count": 13,
+      "success": true
+    },
+    {
+      "address": "0x2938865d32f71bf033ade022f86b4b2c346d96dd",
+      "balance_usd": 2465.87360715891,
+      "token_count": 26,
+      "success": true
+    },
+    {
+      "address": "0xc0cdbcd0b24361df8a888e18d2a3cedd4cec948e",
+      "balance_usd": 35.165717410177606,
+      "token_count": 42,
+      "success": true
+    },
+    {
+      "address": "0x4f6b53856042e675649e476834d01727b36150fa",
+      "balance_usd": 64.04818336034677,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0x3e1bae25bc4eeb818eab90d51e3af356802d4db9",
+      "balance_usd": 56.28911341735663,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0xc1a9127d44248fdc782a7917bade0469795b18d4",
+      "balance_usd": 122.363205079436,
+      "token_count": 11,
+      "success": true
+    },
+    {
+      "address": "0x18ed0c7ef91adb5ccb744661e33440b21f76d711",
+      "balance_usd": 1.1418570829471772,
+      "token_count": 25,
+      "success": true
+    },
+    {
+      "address": "0xf0669ef23b776bb5998920647996bb3a137ca52a",
+      "balance_usd": 252.2542350163005,
+      "token_count": 35,
+      "success": true
+    },
+    {
+      "address": "0x95ae952b0fcbefd6c1013142420641d3c8143b3d",
+      "balance_usd": 17.74195993628917,
+      "token_count": 17,
+      "success": true
+    },
+    {
+      "address": "0x709d24cb33d1b715bbc1783386dcd1c74f214fb8",
+      "balance_usd": 22.60169179232242,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xc02b96a7c069d06bd3a279aeffe160304d5fe236",
+      "balance_usd": 9.04272734829021,
+      "token_count": 12,
+      "success": true
+    },
+    {
+      "address": "0xfe3fd57379b65ba4b0fe1e481e07e969153acae1",
+      "balance_usd": 7629.052264283361,
+      "token_count": 90,
+      "success": true
+    },
+    {
+      "address": "0xa2a2819ed645bd58ec0a44587bf55e81c210e4c4",
+      "balance_usd": 27.70973842912655,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0x1d54ee6c2e15b168f35a578ca2bcf49f6a46c473",
+      "balance_usd": 176.23764887880503,
+      "token_count": 37,
+      "success": true
+    },
+    {
+      "address": "0x341b9a294061cf413d27d2236ae7d85d1d691bc9",
+      "balance_usd": 0.34306011421578775,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0xb74d5e9df8653484e69f817ac41e6dd724d06a56",
+      "balance_usd": 0.06987427093487052,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x83d04f04c685982e176cf2ad5ce7f931c4461497",
+      "balance_usd": 16.649507423404717,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0x712a3dc270eb746bb752a9b9d104b516fe3fb78e",
+      "balance_usd": 0.3732258135440229,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x622e4a9d26a73120bcce965cc269ae3bab5e0400",
+      "balance_usd": 6.62719759059149,
+      "token_count": 19,
+      "success": true
+    },
+    {
+      "address": "0x5742c36379ef2a460bcbcd819a05a50143c93174",
+      "balance_usd": 392.3999936172482,
+      "token_count": 76,
+      "success": true
+    },
+    {
+      "address": "0x64739640e38f55e6bf1e72a3b10405395f71fb45",
+      "balance_usd": 70.6665614133188,
+      "token_count": 66,
+      "success": true
+    },
+    {
+      "address": "0x6019c9e7428823aab76e17772da9abcc2d2bafc9",
+      "balance_usd": 26.90591642722765,
+      "token_count": 19,
+      "success": true
+    },
+    {
+      "address": "0x522002c905cb2e96375ee1525ea9400fdbe47b29",
+      "balance_usd": 19.97743471005111,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x76eab94acb86d33666b124d64f63e0d791c5ee31",
+      "balance_usd": 31.229549148206434,
+      "token_count": 23,
+      "success": true
+    },
+    {
+      "address": "0xf9107317b0ff77ed5b7adea15e50514a3564002b",
+      "balance_usd": 820.6687596671287,
+      "token_count": 215,
+      "success": true
+    },
+    {
+      "address": "0xd0043d6635d1e22de7e187ba60bc2b8bd23fc8db",
+      "balance_usd": 300.22456687254765,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x8cf7baae1bb4662b82564b1b8d8b2a88f90c2150",
+      "balance_usd": 140.56776349448413,
+      "token_count": 20,
+      "success": true
+    },
+    {
+      "address": "0x1a8eccbcd9bd0d9c099fbc7162c8f96ffa225886",
+      "balance_usd": 27.808154324685827,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0xb31c2928140ab88530e7058860871dfc93d0bec6",
+      "balance_usd": 131.35183269406468,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0xb5f6f368268b91b902a9c08a5009c9598325abda",
+      "balance_usd": 12.11828443031076,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0xb0e7fc5cfdc06ec70c88547424b96394d861ce1e",
+      "balance_usd": 1.644767992919262,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0xf37ff9b33c884d8da0775d8827f0b0444dbe4a99",
+      "balance_usd": 975.9488815685893,
+      "token_count": 30,
+      "success": true
+    },
+    {
+      "address": "0xe46ef67cc804d85f9266b98745ec262d59d58b80",
+      "balance_usd": 700.7888783232218,
+      "token_count": 14,
+      "success": true
+    },
+    {
+      "address": "0x0b3be3ee356ce386592f6a944ce9dfc81d8081f8",
+      "balance_usd": 0.12197951323943756,
+      "token_count": 3,
+      "success": true
+    },
+    {
+      "address": "0xdce04f7b358d185d53d958b3ff4cba7092c9632a",
+      "balance_usd": 151.8883987013694,
+      "token_count": 21,
+      "success": true
+    },
+    {
+      "address": "0x3f8cf7725c90ec562ea445089bab685c16b77f1e",
+      "balance_usd": 0.8273087550363818,
+      "token_count": 2,
+      "success": true
+    },
+    {
+      "address": "0x23c5fc38090643b410c8c06c4c0f3246059e98ee",
+      "balance_usd": 67.78221987087339,
+      "token_count": 37,
+      "success": true
+    },
+    {
+      "address": "0x66e1cbb8943c62927aa627f55a4f76317c94efde",
+      "balance_usd": 344.2323236180244,
+      "token_count": 39,
+      "success": true
+    },
+    {
+      "address": "0x86527921274e237b2cc73477027418d8fcb2cb54",
+      "balance_usd": 0.40094281635092666,
+      "token_count": 9,
+      "success": true
+    },
+    {
+      "address": "0xc73fb313e6ad90c5f6f1ffee09c0d00713c32586",
+      "balance_usd": 0.8541159946227227,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0xf5d13b0477c1ca0722cf1ed8879cc3c26530c5e9",
+      "balance_usd": 6.917770299112663,
+      "token_count": 41,
+      "success": true
+    },
+    {
+      "address": "0xd2376448ae86bd4b9b518d0978f49dbe76e37940",
+      "balance_usd": 180.67549256667112,
+      "token_count": 40,
+      "success": true
+    },
+    {
+      "address": "0x6b4acbe1392755594d1d90dd849f08723b938eca",
+      "balance_usd": 129.82049487938943,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0x749bc57da4b9861798a2086e3fbe2ff3fb045140",
+      "balance_usd": 0.16375547857324332,
+      "token_count": 6,
+      "success": true
+    },
+    {
+      "address": "0x9d3f56186ce4ba86214ae9127e07491f2449d698",
+      "balance_usd": 21535.10094715857,
+      "token_count": 49,
+      "success": true
+    },
+    {
+      "address": "0x21d7a1a909620ab6aa7bbc82451a40ae74631a67",
+      "balance_usd": 0.4520128088328001,
+      "token_count": 8,
+      "success": true
+    },
+    {
+      "address": "0x85b433e89006e96a29e657d2d56dfaf56fc57810",
+      "balance_usd": 32.94313389875972,
+      "token_count": 22,
+      "success": true
+    },
+    {
+      "address": "0xb08536dab79553a795842665b696ba0a0a99bfdf",
+      "balance_usd": 1.513617286639889,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0xc995160424e43b7049d492b48b1317bea61933a6",
+      "balance_usd": 11.391114702522113,
+      "token_count": 5,
+      "success": true
+    },
+    {
+      "address": "0xfcb712c220f6dea7feb540e9b10379c2043da488",
+      "balance_usd": 38.303711107212976,
+      "token_count": 7,
+      "success": true
+    },
+    {
+      "address": "0x01fbafef56a7068747e79a44b679a8fdadc794fb",
+      "balance_usd": 3420.232107238218,
+      "token_count": 15,
+      "success": true
+    },
+    {
+      "address": "0x11af70bfd088f671bac685da7f1340012606219e",
+      "balance_usd": 1092.676901443112,
+      "token_count": 10,
+      "success": true
+    },
+    {
+      "address": "0x8657b47406a98abea7c1ef0574415df4d397f785",
+      "balance_usd": 1.6739191456125928,
+      "token_count": 2,
+      "success": true
+    }
+  ]
+}

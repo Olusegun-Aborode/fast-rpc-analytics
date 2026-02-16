@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Protocol - User Community Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max_width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            color: #111827;
+        }
+
+        .timestamp {
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .data-table-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Fast Protocol Analysis Dashboard</h1>
+            <div class="timestamp">Last Updated: {{ timestamp }}</div>
+        </header>
+
+        <section class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Unique Wallets</div>
+                <div class="metric-value">{{ total_unique_wallets }}</div>
+                <small>Total Claims: {{ total_claims }}</small>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Total Wallet Value</div>
+                <div class="metric-value" style="color: #10b981;">{{ total_wallet_value }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Total Collections</div>
+                <div class="metric-value">{{ total_collections }}</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Top Collection</div>
+                <div class="metric-value" style="font-size: 1.5em;">{{ top_collection }}</div>
+                <small>{{ top_collection_wallets }} wallets</small>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Avg Wallets/Collection</div>
+                <div class="metric-value">{{ avg_wallets }}</div>
+            </div>
+        </section>
+
+        <section class="charts-container">
+            <div class="chart-card">
+                <div class="chart-title">Top 10 Collections by Engagement</div>
+                <canvas id="topCollectionsChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <div class="chart-title">Wallet Distribution by Category</div>
+                <canvas id="categoryPieChart"></canvas>
+            </div>
+        </section>
+
+        <section class="data-table-card">
+            <h2>Detailed Collection Data</h2>
+            <table id="collectionsTable" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Collection</th>
+                        <th>Unique Wallets</th>
+                        <th>Category</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in table_data %}
+                    <tr>
+                        <td>{{ item.rank }}</td>
+                        <td>{{ item.entity }}</td>
+                        <td>{{ item.unique_wallets }}</td>
+                        <td>{{ item.category }}</td>
+                        <td>{{ item.percentage }}%</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        // Data passed from Python
+        const chartData = {{ chart_data | tojson }};
+
+        // Top Collections Chart
+        new Chart(document.getElementById('topCollectionsChart'), {
+            type: 'bar',
+            data: {
+                labels: chartData.top_collections.labels,
+                datasets: [{
+                    label: 'Unique Wallets',
+                    data: chartData.top_collections.values,
+                    backgroundColor: '#3b82f6',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Category Pie Chart
+        new Chart(document.getElementById('categoryPieChart'), {
+            type: 'doughnut',
+            data: {
+                labels: chartData.categories.labels,
+                datasets: [{
+                    data: chartData.categories.values,
+                    backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // Initialize DataTable
+        $(document).ready(function () {
+            $('#collectionsTable').DataTable({
+                "pageLength": 10,
+                "order": [[0, "asc"]]
+            });
+        });
+    </script>
+</body>
+
+</html>
