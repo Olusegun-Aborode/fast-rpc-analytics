@@ -51,28 +51,75 @@ st.markdown("""
 
 # Helper functions
 @st.cache_data(ttl=300)  # Cache for 5 minutes
-def load_analysis_data():
-    """Load existing analysis data from files."""
+def fetch_live_stats():
+    """Fetch live collection stats directly from the Fast Protocol API."""
+    import requests
     try:
-        # Load collection data
-        data_path = os.path.join(config.OUTPUT_DIR, 'fast_protocol_data.json')
-        with open(data_path, 'r') as f:
-            raw_data = json.load(f)
-        
-        # Load wallet balances
+        # Fetch overall stats (single fast API call with all collection counts)
+        stats_url = f"{config.BASE_URL}/api/user-community-activity/stats"
+        response = requests.get(stats_url, timeout=config.API_TIMEOUT)
+        response.raise_for_status()
+        stats = response.json()
+
+        # Build collection DataFrame from the byEntity breakdown
+        by_entity = stats.get('byEntity', {})
+        collections = []
+        for entity, count in by_entity.items():
+            collections.append({
+                'entity': entity,
+                'unique_wallets': count,
+                'total_activities': count,
+            })
+
+        df = pd.DataFrame(collections)
+        if not df.empty:
+            df = calculate_metrics(df)
+
+        raw_data = {
+            'total_unique_wallets': stats.get('uniqueUsers', 0),
+            'total_records': stats.get('totalRecords', 0),
+            'by_chain': stats.get('byChain', {}),
+            'timestamp': datetime.now().isoformat(),
+        }
+
+        return raw_data, df
+    except Exception as e:
+        st.warning(f"Could not fetch live data: {e}. Falling back to saved data.")
+        return None, None
+
+
+def load_wallet_balances():
+    """Load wallet balances from disk (Dune API is too slow for live fetching)."""
+    try:
         balance_path = os.path.join(config.OUTPUT_DIR, 'wallet_balances.json')
         with open(balance_path, 'r') as f:
-            balance_data = json.load(f)
-        
-        # Load and process CSV - IMPORTANT: Must call calculate_metrics to add category column
-        df = load_data()
-        if df is not None:
-            df = calculate_metrics(df)  # This adds the 'category' column
-        
-        return raw_data, balance_data, df
-    except Exception as e:
-        st.error(f"Error loading data: {e}")
-        return None, None, None
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def load_analysis_data():
+    """Load live API data for collections, with wallet balances from disk."""
+    # Always try live data first
+    raw_data, df = fetch_live_stats()
+
+    # Fallback to disk if the API call failed
+    if raw_data is None or df is None:
+        try:
+            data_path = os.path.join(config.OUTPUT_DIR, 'fast_protocol_data.json')
+            with open(data_path, 'r') as f:
+                raw_data = json.load(f)
+            df = load_data()
+            if df is not None:
+                df = calculate_metrics(df)
+        except Exception as e:
+            st.error(f"Error loading data: {e}")
+            return None, None, None
+
+    # Wallet balances always from disk
+    balance_data = load_wallet_balances()
+
+    return raw_data, balance_data, df
 
 def refresh_data():
     """Fetch fresh data from API."""
@@ -155,8 +202,9 @@ def main():
     col1, col2 = st.columns([3, 1])
     with col1:
         st.markdown('<p class="main-header">FAST Protocol User Community Analytics</p>', unsafe_allow_html=True)
+        st.caption("🟢 Collection stats update live from the API")
     with col2:
-        if st.button("Refresh Data", use_container_width=True):
+        if st.button("🔄 Deep Refresh (Wallets)", use_container_width=True, help="Re-fetches wallet balances from Dune API. Collection stats already update automatically."):
             raw_data, balance_data, df = refresh_data()
             st.rerun()
     
@@ -170,30 +218,31 @@ def main():
     # Calculate summary metrics
     summary = generate_summary(df)
     total_wallets = raw_data.get('total_unique_wallets', 0)
+    total_records = raw_data.get('total_records', raw_data.get('totalRecords', 0))
     total_value = balance_data.get('total_value_usd', 0) if balance_data else 0
     avg_value = balance_data.get('avg_value_usd', 0) if balance_data else 0
     total_collections = len(df)
     last_updated = raw_data.get('timestamp', 'Unknown')
     
     # Display last updated time
-    st.caption(f"Last Updated: {last_updated}")
+    st.caption(f"Stats fetched: {last_updated}")
     
     st.divider()
     
     # Key Metrics Row
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
         st.metric(
-            label="Total Wallets",
+            label="Unique Users",
             value=f"{total_wallets:,}",
             delta=None
         )
     
     with col2:
         st.metric(
-            label="Total Value",
-            value=f"${total_value:,.2f}",
+            label="Total Claims",
+            value=f"{total_records:,}",
             delta=None
         )
     
@@ -206,9 +255,18 @@ def main():
     
     with col4:
         st.metric(
+            label="Total Wallet Value",
+            value=f"${total_value:,.2f}",
+            delta=None,
+            help="From last deep refresh"
+        )
+    
+    with col5:
+        st.metric(
             label="Avg Wallet Value",
             value=f"${avg_value:,.2f}",
-            delta=None
+            delta=None,
+            help="From last deep refresh"
         )
     
     st.divider()
