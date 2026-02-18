@@ -158,7 +158,17 @@ def get_hype_price():
 
 
 def get_hl_wallet_balance(address, hype_price=None):
-    """Fetch balance for a single wallet on Hyperliquid via Alchemy RPC."""
+    """Fetch balance for a single wallet on Hyperliquid via Alchemy RPC.
+    
+    Prices tokens using VERIFIED contract addresses only (config.HL_VERIFIED_TOKENS).
+    Symbol-based matching is insecure — anyone can deploy a token with any symbol.
+    
+    Pricing rules:
+    - Native HYPE → HYPE price
+    - Verified HYPE-pegged contracts (wHYPE, stHYPE) → HYPE price  
+    - Verified stablecoins (USDC, USDe) → $1
+    - Everything else → not priced (conservative, avoids spam inflation)
+    """
     if hype_price is None:
         hype_price = get_hype_price()
     
@@ -183,7 +193,7 @@ def get_hl_wallet_balance(address, hype_price=None):
             total_usd += native_usd
             token_count += 1
         
-        # 2. ERC20 token balances
+        # 2. ERC20 token balances — only price VERIFIED contracts
         resp2 = requests.post(config.ALCHEMY_HL_URL, json={
             'id': 2, 'jsonrpc': '2.0',
             'method': 'alchemy_getTokenBalances',
@@ -195,18 +205,34 @@ def get_hl_wallet_balance(address, hype_price=None):
         for tb in token_balances:
             contract = tb.get('contractAddress', '').lower()
             raw_balance = tb.get('tokenBalance', '0x0')
-            if raw_balance == '0x0' or raw_balance == '0x':
+            if raw_balance in ('0x0', '0x', '0x00', None):
                 continue
             
-            balance = int(raw_balance, 16) / 1e18  # Most HL tokens are 18 decimals
+            raw_int = int(raw_balance, 16)
+            if raw_int <= 0:
+                continue
+            
+            # Only price tokens from verified contracts
+            token_info = config.HL_VERIFIED_TOKENS.get(contract)
+            if not token_info:
+                continue  # skip unverified tokens entirely
+            
+            symbol, price_type = token_info
+            balance = raw_int / 1e18  # all verified HL tokens are 18 decimals except USDC (6)
+            
+            # Handle USDC's 6 decimals
+            if symbol == 'USDC':
+                balance = raw_int / 1e6
+            
             if balance <= 0:
                 continue
             
             token_count += 1
             
-            # HYPE-denominated tokens (wHYPE, etc.) → use HYPE price
-            if contract in config.HL_HYPE_TOKENS or contract in {k.lower() for k in config.HL_HYPE_TOKENS}:
+            if price_type == 'hype':
                 total_usd += balance * hype_price
+            elif price_type == 'stable':
+                total_usd += balance  # $1 per unit
         
         return {
             'address': address,
@@ -218,6 +244,7 @@ def get_hl_wallet_balance(address, hype_price=None):
         }
     except Exception as e:
         return {'address': address, 'balance_usd': 0, 'chain': 'hyperliquid', 'success': False}
+
 
 
 def get_wallet_balance_multi_chain(address, dune_api_key):
