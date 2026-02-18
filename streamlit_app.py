@@ -15,11 +15,13 @@ import sys
 # Add the current directory to the path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+import requests
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
 try:
     import config
-    from fetch_fast_protocol_data import collect_all_data, save_data
     from analyze_fast_protocol import load_data, calculate_metrics, generate_summary
-    from fetch_wallet_balances import fetch_all_wallet_balances
+    from fetch_wallet_balances import is_spam_token, get_wallet_balance
 except ImportError as e:
     st.error(f"Error importing modules: {e}")
     st.stop()
@@ -53,7 +55,6 @@ st.markdown("""
 @st.cache_data(ttl=300)  # Cache for 5 minutes
 def fetch_live_stats():
     """Fetch live collection stats directly from the Fast Protocol API."""
-    import requests
     try:
         # Fetch overall stats (single fast API call with all collection counts)
         stats_url = f"{config.BASE_URL}/api/user-community-activity/stats"
@@ -89,7 +90,11 @@ def fetch_live_stats():
 
 
 def load_wallet_balances():
-    """Load wallet balances from disk (Dune API is too slow for live fetching)."""
+    """Load wallet balances from session_state or disk."""
+    # Prefer session_state (from deep refresh)
+    if 'wallet_balance_data' in st.session_state:
+        return st.session_state['wallet_balance_data']
+    # Fallback to disk
     try:
         balance_path = os.path.join(config.OUTPUT_DIR, 'wallet_balances.json')
         with open(balance_path, 'r') as f:
@@ -99,7 +104,7 @@ def load_wallet_balances():
 
 
 def load_analysis_data():
-    """Load live API data for collections, with wallet balances from disk."""
+    """Load live API data for collections, with wallet balances from session/disk."""
     # Always try live data first
     raw_data, df = fetch_live_stats()
 
@@ -116,37 +121,121 @@ def load_analysis_data():
             st.error(f"Error loading data: {e}")
             return None, None, None
 
-    # Wallet balances always from disk
+    # Wallet balances from session_state or disk
     balance_data = load_wallet_balances()
 
     return raw_data, balance_data, df
 
+
+def _fetch_all_wallet_addresses():
+    """Fetch all unique wallet addresses by querying each entity endpoint."""
+    # Step 1: Get entity list
+    entities_url = f"{config.BASE_URL}/api/user-community-activity/entities"
+    resp = requests.get(entities_url, timeout=config.API_TIMEOUT)
+    resp.raise_for_status()
+    data = resp.json()
+    entities = data.get('entities', data) if isinstance(data, dict) else data
+
+    # Step 2: For each entity, fetch users (paginated)
+    all_wallets = set()
+    for entity in entities:
+        offset = 0
+        limit = 200
+        while True:
+            url = f"{config.BASE_URL}/api/user-community-activity/entity/{entity}"
+            r = requests.get(url, params={'limit': limit, 'offset': offset}, timeout=config.API_TIMEOUT)
+            r.raise_for_status()
+            users = r.json()
+            if isinstance(users, dict):
+                users = users.get('users', users.get('data', []))
+            if not users:
+                break
+            for user in users:
+                if isinstance(user, dict):
+                    addr = user.get('wallet') or user.get('walletAddress')
+                    if addr:
+                        all_wallets.add(addr)
+                elif isinstance(user, str):
+                    all_wallets.add(user)
+            if len(users) < limit:
+                break
+            offset += limit
+    return list(all_wallets)
+
+
 def refresh_data():
-    """Fetch fresh data from API."""
-    with st.spinner("Fetching fresh data from FAST Protocol API..."):
+    """Deep refresh: fetch all wallet addresses from API, then scan balances via Dune."""
+    try:
+        status = st.status("🔄 Deep Refresh in progress...", expanded=True)
+
+        # Step 1: Fetch wallet addresses from Fast Protocol API
+        status.update(label="📡 Fetching wallet addresses from API...")
+        wallets = _fetch_all_wallet_addresses()
+        st.write(f"Found **{len(wallets)}** unique wallets to scan")
+
+        if not wallets:
+            st.error("No wallet addresses found from the API.")
+            return None, None, None
+
+        if not hasattr(config, 'DUNE_API_KEY') or not config.DUNE_API_KEY:
+            st.error("DUNE_API_KEY not configured. Cannot fetch wallet balances.")
+            return None, None, None
+
+        # Step 2: Fetch balances from Dune Sim API
+        status.update(label=f"💰 Scanning {len(wallets)} wallets via Dune API...")
         progress_bar = st.progress(0)
-        
-        # Step 1: Fetch protocol data
-        progress_bar.progress(20)
-        raw_data = collect_all_data()
-        save_data(raw_data)
-        
-        # Step 2: Process data
-        progress_bar.progress(50)
-        df = load_data()
-        df = calculate_metrics(df)
-        
-        # Step 3: Fetch wallet balances
-        progress_bar.progress(70)
-        balance_data = fetch_all_wallet_balances()
-        
-        progress_bar.progress(100)
-        st.success("Data refreshed successfully!")
-        
-        # Clear cache to reload new data
+        results = []
+        completed = 0
+
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            future_to_wallet = {
+                executor.submit(get_wallet_balance, w, config.DUNE_API_KEY): w
+                for w in wallets
+            }
+            for future in as_completed(future_to_wallet):
+                result = future.result()
+                results.append(result)
+                completed += 1
+                progress_bar.progress(completed / len(wallets))
+
+        # Step 3: Calculate totals
+        total_value = sum(r.get('balance_usd', 0) for r in results)
+        successful = sum(1 for r in results if r.get('success'))
+        avg_value = total_value / successful if successful else 0
+
+        balance_data = {
+            'total_value_usd': total_value,
+            'avg_value_usd': avg_value,
+            'wallet_balances': results,
+            'wallets_scanned': len(wallets),
+            'wallets_successful': successful,
+            'timestamp': datetime.now().isoformat(),
+        }
+
+        # Store in session_state so it persists across reruns
+        st.session_state['wallet_balance_data'] = balance_data
+
+        # Also try to save to disk (may fail on Cloud, that's OK)
+        try:
+            output_path = os.path.join(config.OUTPUT_DIR, 'wallet_balances.json')
+            with open(output_path, 'w') as f:
+                json.dump(balance_data, f, indent=2)
+        except Exception:
+            pass
+
+        status.update(label=f"✅ Scanned {successful}/{len(wallets)} wallets — Total: ${total_value:,.2f}", state="complete")
+        progress_bar.progress(1.0)
+
+        # Clear the stats cache so next load picks up fresh data
         st.cache_data.clear()
-        
-    return raw_data, balance_data, df
+
+        # Reload live stats
+        raw_data, df = fetch_live_stats()
+        return raw_data, balance_data, df
+
+    except Exception as e:
+        st.error(f"Deep refresh failed: {e}")
+        return None, None, None
 
 def create_collection_bar_chart(df):
     """Create interactive bar chart for collection performance."""
