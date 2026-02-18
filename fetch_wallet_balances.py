@@ -92,20 +92,7 @@ def is_spam_token(balance_entry):
     return False
 
 def get_wallet_balance(address, api_key):
-    """Fetch balance for a single wallet using Dune Sim API."""
-    headers = {'X-Dune-Api-Key': api_key} # Skill said X-Sim-Api-Key but usually it's X-Dune-Api-Key for Sim API too? 
-                                          # Skill doc said: headers = {'X-Sim-Api-Key': DUNE_API_KEY}
-                                          # Let's check the doc reference if possible or stick to skill.
-                                          # Skill doc says: 'X-Sim-Api-Key'. I will follow the skill.
-    
-    # Actually, recent Dune docs say X-Dune-Api-Key works for all. 
-    # But specifically for Sim API, let's use what the skill says to be safe: X-Dune-Api-Key is standard now.
-    # Wait, the skill explicitly wrote: headers = {'X-Sim-Api-Key': DUNE_API_KEY}
-    # I should follow the skill instructions unless I know for a fact it's wrong.
-    # However, standard Dune API uses X-Dune-Api-Key. 
-    # Let me try X-Dune-Api-Key as it is the standard for the platform.
-    
-    # API Header for Dune Sim API
+    """Fetch balance for a single wallet on Ethereum mainnet using Dune Sim API."""
     headers = {'X-Sim-Api-Key': api_key}
     
     params = {
@@ -133,15 +120,126 @@ def get_wallet_balance(address, api_key):
                 'address': address,
                 'balance_usd': total_usd,
                 'token_count': len(legitimate_balances),
+                'chain': 'ethereum',
                 'success': True
             }
         else:
-            print(f"Error {response.status_code} for {address}: {response.text}")
-            return {'address': address, 'balance_usd': 0, 'success': False}
+            return {'address': address, 'balance_usd': 0, 'chain': 'ethereum', 'success': False}
             
     except Exception as e:
-        print(f"Exception for {address}: {e}")
-        return {'address': address, 'balance_usd': 0, 'success': False}
+        return {'address': address, 'balance_usd': 0, 'chain': 'ethereum', 'success': False}
+
+
+# ===== Hyperliquid (Alchemy RPC) =====
+
+_hype_price_cache = {'price': None, 'timestamp': 0}
+
+def get_hype_price():
+    """Fetch current HYPE/USD price from CoinGecko (cached for 5 minutes)."""
+    import time as _time
+    now = _time.time()
+    if _hype_price_cache['price'] and (now - _hype_price_cache['timestamp']) < 300:
+        return _hype_price_cache['price']
+    
+    try:
+        resp = requests.get(
+            config.COINGECKO_PRICE_URL,
+            params={'ids': 'hyperliquid', 'vs_currencies': 'usd'},
+            timeout=10
+        )
+        resp.raise_for_status()
+        price = resp.json().get('hyperliquid', {}).get('usd', 0)
+        if price > 0:
+            _hype_price_cache['price'] = price
+            _hype_price_cache['timestamp'] = now
+        return price
+    except Exception:
+        return _hype_price_cache.get('price', 0) or 0
+
+
+def get_hl_wallet_balance(address, hype_price=None):
+    """Fetch balance for a single wallet on Hyperliquid via Alchemy RPC."""
+    if hype_price is None:
+        hype_price = get_hype_price()
+    
+    if not hype_price:
+        return {'address': address, 'balance_usd': 0, 'chain': 'hyperliquid', 'success': False}
+    
+    total_usd = 0.0
+    token_count = 0
+    
+    try:
+        # 1. Native HYPE balance
+        resp = requests.post(config.ALCHEMY_HL_URL, json={
+            'id': 1, 'jsonrpc': '2.0',
+            'method': 'eth_getBalance',
+            'params': [address, 'latest']
+        }, timeout=10)
+        resp.raise_for_status()
+        result = resp.json().get('result', '0x0')
+        native_balance = int(result, 16) / 1e18
+        native_usd = native_balance * hype_price
+        if native_balance > 0:
+            total_usd += native_usd
+            token_count += 1
+        
+        # 2. ERC20 token balances
+        resp2 = requests.post(config.ALCHEMY_HL_URL, json={
+            'id': 2, 'jsonrpc': '2.0',
+            'method': 'alchemy_getTokenBalances',
+            'params': [address, 'erc20']
+        }, timeout=10)
+        resp2.raise_for_status()
+        token_balances = resp2.json().get('result', {}).get('tokenBalances', [])
+        
+        for tb in token_balances:
+            contract = tb.get('contractAddress', '').lower()
+            raw_balance = tb.get('tokenBalance', '0x0')
+            if raw_balance == '0x0' or raw_balance == '0x':
+                continue
+            
+            balance = int(raw_balance, 16) / 1e18  # Most HL tokens are 18 decimals
+            if balance <= 0:
+                continue
+            
+            token_count += 1
+            
+            # HYPE-denominated tokens (wHYPE, etc.) → use HYPE price
+            if contract in config.HL_HYPE_TOKENS or contract in {k.lower() for k in config.HL_HYPE_TOKENS}:
+                total_usd += balance * hype_price
+        
+        return {
+            'address': address,
+            'balance_usd': total_usd,
+            'balance_hype': native_balance,
+            'token_count': token_count,
+            'chain': 'hyperliquid',
+            'success': True
+        }
+    except Exception as e:
+        return {'address': address, 'balance_usd': 0, 'chain': 'hyperliquid', 'success': False}
+
+
+def get_wallet_balance_multi_chain(address, dune_api_key):
+    """Fetch balances across Ethereum (Dune) + Hyperliquid (Alchemy) and combine."""
+    hype_price = get_hype_price()
+    
+    eth_result = get_wallet_balance(address, dune_api_key)
+    hl_result = get_hl_wallet_balance(address, hype_price)
+    
+    eth_usd = eth_result.get('balance_usd', 0) if eth_result.get('success') else 0
+    hl_usd = hl_result.get('balance_usd', 0) if hl_result.get('success') else 0
+    
+    return {
+        'address': address,
+        'balance_usd': eth_usd + hl_usd,
+        'eth_balance_usd': eth_usd,
+        'hl_balance_usd': hl_usd,
+        'hl_balance_hype': hl_result.get('balance_hype', 0),
+        'token_count': (eth_result.get('token_count', 0) or 0) + (hl_result.get('token_count', 0) or 0),
+        'success': eth_result.get('success', False) or hl_result.get('success', False),
+    }
+
 
 def fetch_all_wallet_balances():
     """Fetch balances for all unique wallets in the dataset."""

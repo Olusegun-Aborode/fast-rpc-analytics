@@ -21,7 +21,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 try:
     import config
     from analyze_fast_protocol import load_data, calculate_metrics, generate_summary
-    from fetch_wallet_balances import is_spam_token, get_wallet_balance
+    from fetch_wallet_balances import is_spam_token, get_wallet_balance_multi_chain, get_hype_price
 except ImportError as e:
     st.error(f"Error importing modules: {e}")
     st.stop()
@@ -164,7 +164,7 @@ def _fetch_all_wallet_addresses():
 
 
 def refresh_data():
-    """Deep refresh: fetch all wallet addresses from API, then scan balances via Dune."""
+    """Deep refresh: fetch wallet balances across Ethereum + Hyperliquid."""
     try:
         status = st.status("🔄 Deep Refresh in progress...", expanded=True)
 
@@ -181,15 +181,19 @@ def refresh_data():
             st.error("DUNE_API_KEY not configured. Cannot fetch wallet balances.")
             return None, None, None
 
-        # Step 2: Fetch balances from Dune Sim API
-        status.update(label=f"💰 Scanning {len(wallets)} wallets via Dune API...")
+        # Step 1b: Get HYPE price upfront
+        hype_price = get_hype_price()
+        st.write(f"HYPE price: **${hype_price:,.2f}**")
+
+        # Step 2: Multi-chain balance scan (Ethereum via Dune + Hyperliquid via Alchemy)
+        status.update(label=f"💰 Scanning {len(wallets)} wallets (ETH + Hyperliquid)...")
         progress_bar = st.progress(0)
         results = []
         completed = 0
 
         with ThreadPoolExecutor(max_workers=5) as executor:
             future_to_wallet = {
-                executor.submit(get_wallet_balance, w, config.DUNE_API_KEY): w
+                executor.submit(get_wallet_balance_multi_chain, w, config.DUNE_API_KEY): w
                 for w in wallets
             }
             for future in as_completed(future_to_wallet):
@@ -200,12 +204,17 @@ def refresh_data():
 
         # Step 3: Calculate totals
         total_value = sum(r.get('balance_usd', 0) for r in results)
+        total_eth = sum(r.get('eth_balance_usd', 0) for r in results)
+        total_hl = sum(r.get('hl_balance_usd', 0) for r in results)
         successful = sum(1 for r in results if r.get('success'))
         avg_value = total_value / successful if successful else 0
 
         balance_data = {
             'total_value_usd': total_value,
+            'total_eth_usd': total_eth,
+            'total_hl_usd': total_hl,
             'avg_value_usd': avg_value,
+            'hype_price': hype_price,
             'wallet_balances': results,
             'wallets_scanned': len(wallets),
             'wallets_successful': successful,
@@ -223,7 +232,7 @@ def refresh_data():
         except Exception:
             pass
 
-        status.update(label=f"✅ Scanned {successful}/{len(wallets)} wallets — Total: ${total_value:,.2f}", state="complete")
+        status.update(label=f"✅ Scanned {successful}/{len(wallets)} wallets — Total: ${total_value:,.2f} (ETH: ${total_eth:,.2f} | HL: ${total_hl:,.2f})", state="complete")
         progress_bar.progress(1.0)
 
         # Clear the stats cache so next load picks up fresh data
@@ -260,27 +269,34 @@ def create_collection_bar_chart(df):
     return fig
 
 def get_wallet_balances_table(balance_data):
-    """Create wallet balances table with Etherscan links."""
+    """Create wallet balances table with per-chain breakdown and explorer links."""
     if not balance_data or 'wallet_balances' not in balance_data:
         return pd.DataFrame()
     
     wallets = balance_data['wallet_balances']
     
-    # Sort wallets by balance (descending)
+    # Sort wallets by total balance (descending)
     sorted_wallets = sorted(wallets, key=lambda x: x.get('balance_usd', 0), reverse=True)
     
     data = []
     for wallet_info in sorted_wallets:
         address = wallet_info.get('address', '')
-        balance_usd = wallet_info.get('balance_usd', 0)
+        total_usd = wallet_info.get('balance_usd', 0)
+        eth_usd = wallet_info.get('eth_balance_usd', total_usd)  # fallback for old data
+        hl_usd = wallet_info.get('hl_balance_usd', 0)
+        hl_hype = wallet_info.get('hl_balance_hype', 0)
         
-        # Create Etherscan link
         etherscan_link = f"https://etherscan.io/address/{address}"
+        hl_explorer_link = f"https://explorer.hyperliquid.xyz/address/{address}"
         
         data.append({
             'Wallet': address,
+            'Total (USD)': f"${total_usd:,.2f}",
+            'ETH (USD)': f"${eth_usd:,.2f}",
+            'HL (USD)': f"${hl_usd:,.2f}",
+            'HYPE': f"{hl_hype:,.4f}" if hl_hype else "—",
             'Etherscan': etherscan_link,
-            'Balance': f"${balance_usd:,.2f}"
+            'HL Explorer': hl_explorer_link,
         })
     
     return pd.DataFrame(data)
@@ -377,13 +393,16 @@ def main():
     wallet_df = get_wallet_balances_table(balance_data)
     
     if not wallet_df.empty:
-        # Display table with clickable Etherscan links
         st.dataframe(
             wallet_df,
             column_config={
-                "Wallet": st.column_config.TextColumn("Wallet", width="large"),
-                "Etherscan": st.column_config.LinkColumn("Etherscan Link", display_text="View on Etherscan"),
-                "Balance": st.column_config.TextColumn("Balance (USD)", width="medium"),
+                "Wallet": st.column_config.TextColumn("Wallet", width="medium"),
+                "Total (USD)": st.column_config.TextColumn("Total", width="small"),
+                "ETH (USD)": st.column_config.TextColumn("Ethereum", width="small"),
+                "HL (USD)": st.column_config.TextColumn("Hyperliquid", width="small"),
+                "HYPE": st.column_config.TextColumn("HYPE", width="small"),
+                "Etherscan": st.column_config.LinkColumn("Etherscan", display_text="View"),
+                "HL Explorer": st.column_config.LinkColumn("HL Explorer", display_text="View"),
             },
             use_container_width=True,
             hide_index=True
