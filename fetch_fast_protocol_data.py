@@ -121,8 +121,8 @@ def get_entity_users(entity_name, max_users=None):
             # initial_count = len(all_users) # Unused
             all_users.extend(users)
             
-            # If we didn't get a full page, we're likely done
-            if len(users) < limit:
+            # If we didn't get a full page, or got more than requested (API ignored limit), we're done
+            if len(users) != limit:
                 print(f" Done ({len(all_users)} users).")
                 break
             
@@ -185,9 +185,14 @@ def collect_all_data():
                            # Plan's save_data saves 'collection_data', so yes.
         })
 
+    # We need to explicitly fetch the real total unique users since our wallet array is capped
+    overall_stats = get_entity_stats("")
+    real_total = overall_stats.get('uniqueUsers', len(all_wallets))
+
     result = {
         'collections': collection_data,
-        'total_unique_wallets': len(all_wallets),
+        'total_unique_wallets': real_total,  # Use real total from stats rather than len(all_wallets)
+        'total_extracted_wallets': len(all_wallets), # keep track of what we actually have
         'timestamp': datetime.now().isoformat()
     }
     

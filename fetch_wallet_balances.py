@@ -247,10 +247,8 @@ def get_hl_wallet_balance(address, hype_price=None):
 
 
 
-def get_wallet_balance_multi_chain(address, dune_api_key):
+def get_wallet_balance_multi_chain(address, dune_api_key, hype_price):
     """Fetch balances across Ethereum (Dune) + Hyperliquid (Alchemy) and combine."""
-    hype_price = get_hype_price()
-    
     eth_result = get_wallet_balance(address, dune_api_key)
     hl_result = get_hl_wallet_balance(address, hype_price)
     
@@ -275,14 +273,6 @@ def fetch_all_wallet_balances():
         return None
 
     # Load unique wallets from the processed data
-    # We can load the CSV or the JSON. JSON has 'users' list but it is nested.
-    # analyze_fast_protocol.py's load_data returns the collections DF.
-    # We need to extract unique wallets from that.
-    
-    # Actually, we need the raw data to get all unique wallets across collections?
-    # Or just load the previous JSON which had user lists.
-    # Yes, fast_protocol_data.json has the user lists.
-    
     json_path = os.path.join(config.OUTPUT_DIR, 'fast_protocol_data.json')
     if not os.path.exists(json_path):
         print("Data file not found.")
@@ -310,9 +300,11 @@ def fetch_all_wallet_balances():
     completed = 0
     
     # Parallel processing
+    hype_price = get_hype_price()
+    
     with ThreadPoolExecutor(max_workers=5) as executor:
         future_to_wallet = {
-            executor.submit(get_wallet_balance, wallet, config.DUNE_API_KEY): wallet 
+            executor.submit(get_wallet_balance_multi_chain, wallet, config.DUNE_API_KEY, hype_price): wallet 
             for wallet in wallets
         }
         
@@ -323,17 +315,24 @@ def fetch_all_wallet_balances():
             if completed % 10 == 0:
                 print(f"Processed {completed}/{len(wallets)} wallets...")
             
-            # Rate limiting sleep (integrated in loop but technically should be per thread request start)
-            # Since we use max_workers=5, we are already limiting concurrency. 
-            
     # Calculate stats
-    total_value = sum(r['balance_usd'] for r in results)
-    avg_value = total_value / len(results) if results else 0
+    total_value = sum(r.get('balance_usd', 0) for r in results)
+    total_eth = sum(r.get('eth_balance_usd', 0) for r in results)
+    total_hl = sum(r.get('hl_balance_usd', 0) for r in results)
+    successful = sum(1 for r in results if r.get('success'))
+    avg_value = total_value / successful if successful else 0
+    hype_price = get_hype_price()
     
     summary = {
         'total_value_usd': total_value,
+        'total_eth_usd': total_eth,
+        'total_hl_usd': total_hl,
         'avg_value_usd': avg_value,
-        'wallet_balances': results
+        'hype_price': hype_price,
+        'wallet_balances': results,
+        'wallets_scanned': len(wallets),
+        'wallets_successful': successful,
+        'timestamp': time.strftime("%Y-%m-%dT%H:%M:%S")
     }
     
     # Save results
@@ -341,7 +340,7 @@ def fetch_all_wallet_balances():
     with open(output_path, 'w') as f:
         json.dump(summary, f, indent=2)
         
-    print(f"\nTotal Wallet Value: ${total_value:,.2f}")
+    print(f"\nTotal Wallet Value: ${total_value:,.2f} (ETH: ${total_eth:,.2f} | HL: ${total_hl:,.2f})")
     print(f"Balances saved to {output_path}")
     return summary
 

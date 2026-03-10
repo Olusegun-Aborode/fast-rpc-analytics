@@ -9,6 +9,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import json
 import os
+import time as _time
 from datetime import datetime
 import sys
 
@@ -89,12 +90,9 @@ def fetch_live_stats():
         return None, None
 
 
+@st.cache_data(ttl=60)  # Cache for 60s so rapid re-renders don't hammer disk, but page reload always refreshes
 def load_wallet_balances():
-    """Load wallet balances from session_state or disk."""
-    # Prefer session_state (from deep refresh)
-    if 'wallet_balance_data' in st.session_state:
-        return st.session_state['wallet_balance_data']
-    # Fallback to disk
+    """Always load wallet balances fresh from disk. Never rely on session_state."""
     try:
         balance_path = os.path.join(config.OUTPUT_DIR, 'wallet_balances.json')
         with open(balance_path, 'r') as f:
@@ -157,7 +155,7 @@ def _fetch_all_wallet_addresses():
                         all_wallets.add(addr)
                 elif isinstance(user, str):
                     all_wallets.add(user)
-            if len(users) < limit:
+            if len(users) != limit:
                 break
             offset += limit
     return list(all_wallets)
@@ -165,42 +163,58 @@ def _fetch_all_wallet_addresses():
 
 def refresh_data():
     """Deep refresh: fetch wallet balances across Ethereum + Hyperliquid."""
+    status = st.status("🔄 Deep Refresh in progress...", expanded=True)
     try:
-        status = st.status("🔄 Deep Refresh in progress...", expanded=True)
-
         # Step 1: Fetch wallet addresses from Fast Protocol API
         status.update(label="📡 Fetching wallet addresses from API...")
         wallets = _fetch_all_wallet_addresses()
-        st.write(f"Found **{len(wallets)}** unique wallets to scan")
+        n_wallets = len(wallets)
+        status.write(f"Found **{n_wallets:,}** unique wallets to scan (ETH + Hyperliquid)")
 
         if not wallets:
-            st.error("No wallet addresses found from the API.")
-            return None, None, None
+            status.update(label="❌ No wallet addresses found.", state="error")
+            return
 
         if not hasattr(config, 'DUNE_API_KEY') or not config.DUNE_API_KEY:
-            st.error("DUNE_API_KEY not configured. Cannot fetch wallet balances.")
-            return None, None, None
+            status.update(label="❌ DUNE_API_KEY not configured.", state="error")
+            return
 
         # Step 1b: Get HYPE price upfront
         hype_price = get_hype_price()
-        st.write(f"HYPE price: **${hype_price:,.2f}**")
+        status.write(f"HYPE price: **${hype_price:,.2f}**")
 
-        # Step 2: Multi-chain balance scan (Ethereum via Dune + Hyperliquid via Alchemy)
-        status.update(label=f"💰 Scanning {len(wallets)} wallets (ETH + Hyperliquid)...")
+        # Step 2: Multi-chain balance scan
+        status.update(label=f"💰 Scanning {n_wallets:,} wallets across Ethereum + Hyperliquid...")
         progress_bar = st.progress(0)
+        live_label = st.empty()  # Updating status line
         results = []
         completed = 0
+        scan_start = _time.time()
 
         with ThreadPoolExecutor(max_workers=5) as executor:
             future_to_wallet = {
-                executor.submit(get_wallet_balance_multi_chain, w, config.DUNE_API_KEY): w
+                executor.submit(get_wallet_balance_multi_chain, w, config.DUNE_API_KEY, hype_price): w
                 for w in wallets
             }
             for future in as_completed(future_to_wallet):
                 result = future.result()
                 results.append(result)
                 completed += 1
-                progress_bar.progress(completed / len(wallets))
+
+                # Update progress every 5 wallets
+                if completed % 5 == 0 or completed == n_wallets:
+                    elapsed = _time.time() - scan_start
+                    rate = completed / elapsed if elapsed > 0 else 0
+                    remaining = (n_wallets - completed) / rate if rate > 0 else 0
+                    elapsed_str = f"{int(elapsed // 60)}:{int(elapsed % 60):02d}"
+                    eta_str = f"{int(remaining // 60)}:{int(remaining % 60):02d}"
+                    running_total = sum(r.get('balance_usd', 0) for r in results)
+                    live_label.markdown(
+                        f"⏳ **{completed:,}/{n_wallets:,}** wallets · "
+                        f"Elapsed: **{elapsed_str}** · ETA: **{eta_str}** · "
+                        f"Running total: **${running_total:,.0f}**"
+                    )
+                    progress_bar.progress(completed / n_wallets)
 
         # Step 3: Calculate totals
         total_value = sum(r.get('balance_usd', 0) for r in results)
@@ -216,35 +230,48 @@ def refresh_data():
             'avg_value_usd': avg_value,
             'hype_price': hype_price,
             'wallet_balances': results,
-            'wallets_scanned': len(wallets),
+            'wallets_scanned': n_wallets,
             'wallets_successful': successful,
             'timestamp': datetime.now().isoformat(),
         }
 
-        # Store in session_state so it persists across reruns
-        st.session_state['wallet_balance_data'] = balance_data
-
-        # Also try to save to disk (may fail on Cloud, that's OK)
+        # Only overwrite disk if this result is better than what's cached
         try:
             output_path = os.path.join(config.OUTPUT_DIR, 'wallet_balances.json')
-            with open(output_path, 'w') as f:
-                json.dump(balance_data, f, indent=2)
-        except Exception:
-            pass
+            existing_total = 0
+            if os.path.exists(output_path):
+                with open(output_path, 'r') as f:
+                    existing_total = json.load(f).get('total_value_usd', 0)
 
-        status.update(label=f"✅ Scanned {successful}/{len(wallets)} wallets — Total: ${total_value:,.2f} (ETH: ${total_eth:,.2f} | HL: ${total_hl:,.2f})", state="complete")
-        progress_bar.progress(1.0)
+            if total_value >= existing_total * 0.8:  # Only overwrite if not >20% lower (guards against bad runs)
+                with open(output_path, 'w') as f:
+                    json.dump(balance_data, f, indent=2)
+            else:
+                status.write(
+                    f"⚠️ New total (${total_value:,.0f}) is significantly lower than cached "
+                    f"(${existing_total:,.0f}) — disk NOT overwritten. Check HL API health."
+                )
+        except Exception as write_err:
+            status.write(f"⚠️ Could not save to disk: {write_err}")
 
-        # Clear the stats cache so next load picks up fresh data
+        st.session_state['wallet_balance_data'] = balance_data
+
+        elapsed_total = _time.time() - scan_start
+        elapsed_str = f"{int(elapsed_total // 60)}m {int(elapsed_total % 60)}s"
+        live_label.empty()
+        # Clear disk cache so load_wallet_balances() reads the new file on rerun
         st.cache_data.clear()
-
-        # Reload live stats
-        raw_data, df = fetch_live_stats()
-        return raw_data, balance_data, df
+        status.update(
+            label=(
+                f"✅ Done in {elapsed_str} — {successful:,}/{n_wallets:,} wallets · "
+                f"Total: **${total_value:,.2f}** "
+                f"(ETH: ${total_eth:,.2f} | HL: ${total_hl:,.2f})"
+            ),
+            state="complete"
+        )
 
     except Exception as e:
-        st.error(f"Deep refresh failed: {e}")
-        return None, None, None
+        status.update(label=f"❌ Deep refresh failed: {e}", state="error")
 
 def create_collection_bar_chart(df):
     """Create interactive bar chart for collection performance."""
@@ -287,14 +314,14 @@ def get_wallet_balances_table(balance_data):
         hl_hype = wallet_info.get('hl_balance_hype', 0)
         
         etherscan_link = f"https://etherscan.io/address/{address}"
-        hl_explorer_link = f"https://explorer.hyperliquid.xyz/address/{address}"
+        hl_explorer_link = f"https://hyperevmscan.io/address/{address}"
         
         data.append({
             'Wallet': address,
             'Total (USD)': f"${total_usd:,.2f}",
             'ETH (USD)': f"${eth_usd:,.2f}",
             'HL (USD)': f"${hl_usd:,.2f}",
-            'HYPE': f"{hl_hype:,.4f}" if hl_hype else "—",
+            'HL (HYPE equiv)': f"{hl_hype:,.4f}" if hl_hype else "—",
             'Etherscan': etherscan_link,
             'HL Explorer': hl_explorer_link,
         })
@@ -309,16 +336,35 @@ def main():
         st.markdown('<p class="main-header">FAST Protocol User Community Analytics</p>', unsafe_allow_html=True)
         st.caption("🟢 Collection stats update live from the API")
     with col2:
-        if st.button("🔄 Deep Refresh (Wallets)", use_container_width=True, help="Re-fetches wallet balances from Dune API. Collection stats already update automatically."):
-            raw_data, balance_data, df = refresh_data()
+        if st.button(
+            "🔄 Deep Refresh (Wallets)",
+            use_container_width=True,
+            help="Re-scans all wallet balances from Ethereum (Dune) + Hyperliquid (Alchemy). Takes ~5–8 minutes for 1,175 wallets."
+        ):
+            refresh_data()
+            # Rerun only happens here, AFTER session_state has been populated
             st.rerun()
-    
+
     # Load data
     raw_data, balance_data, df = load_analysis_data()
     
     if raw_data is None or df is None:
         st.warning("No data available. Click 'Refresh Data' to fetch data from the API.")
         return
+    
+    # DEBUG: Show exactly where data came from
+    with st.expander("🔍 Debug: Data source (remove after debugging)"):
+        import os as _os
+        bp = _os.path.join(config.OUTPUT_DIR, 'wallet_balances.json')
+        st.write(f"**Disk file path:** `{bp}`")
+        st.write(f"**Disk file exists:** {_os.path.exists(bp)}")
+        if balance_data:
+            st.write(f"**balance_data total_value_usd:** `{balance_data.get('total_value_usd')}`")
+            st.write(f"**balance_data avg_value_usd:** `{balance_data.get('avg_value_usd')}`")
+            st.write(f"**balance_data timestamp:** `{balance_data.get('timestamp')}`")
+            st.write(f"**balance_data wallets_scanned:** `{balance_data.get('wallets_scanned')}`")
+        else:
+            st.write("**balance_data is None!**")
     
     # Calculate summary metrics
     summary = generate_summary(df)
@@ -388,7 +434,14 @@ def main():
     st.divider()
     
     # Wallet Balances Section
-    st.subheader("Wallet Balances")
+    wallet_count = len(balance_data.get('wallet_balances', [])) if balance_data else 0
+    st.subheader(f"Wallet Balances ({wallet_count:,} wallets)")
+
+    if balance_data:
+        ts = balance_data.get('timestamp', '')
+        eth_total = balance_data.get('total_eth_usd', 0)
+        hl_total = balance_data.get('total_hl_usd', 0)
+        st.caption(f"Last computed: {ts} · ETH chain: ${eth_total:,.2f} · Hyperliquid: ${hl_total:,.2f}")
     
     wallet_df = get_wallet_balances_table(balance_data)
     
@@ -400,7 +453,7 @@ def main():
                 "Total (USD)": st.column_config.TextColumn("Total", width="small"),
                 "ETH (USD)": st.column_config.TextColumn("Ethereum", width="small"),
                 "HL (USD)": st.column_config.TextColumn("Hyperliquid", width="small"),
-                "HYPE": st.column_config.TextColumn("HYPE", width="small"),
+                "HL (HYPE equiv)": st.column_config.TextColumn("HL in HYPE", width="small", help="Total Hyperliquid USD value ÷ HYPE price at scan time. Not a raw token count."),
                 "Etherscan": st.column_config.LinkColumn("Etherscan", display_text="View"),
                 "HL Explorer": st.column_config.LinkColumn("HL Explorer", display_text="View"),
             },
