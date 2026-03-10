@@ -1,38 +1,38 @@
 # Fast Protocol User Community Analysis Report
-Date: 2026-02-15 22:11:25
+Date: 2026-02-26 16:43:42
 
 ## Executive Summary
-- **Total Unique Wallets:** 332 (90 distinct addresses)
-- **Total Claims/Participations:** 566 (121 total entries)
-- **Total Wallet Value:** $395,646.55
+- **Total Unique Wallets:** 396 (90 distinct addresses)
+- **Total Claims/Participations:** 583 (121 total entries)
+- **Total Wallet Value:** $305,794.02
 - **Total Collections Tracked:** 9
-- **Most Popular Collection:** hyperliquid_activity (201 wallets)
-- **Average Wallets per Collection:** 62.89
+- **Most Popular Collection:** hype_holder (200 wallets)
+- **Average Wallets per Collection:** 64.78
 
 ## Collection Performance
 
 ### Top 10 Collections
 | Rank | Collection | Unique Wallets | Category | Percentage |
 |------|------------|----------------|----------|------------|
-| 1 | hyperliquid_activity | 201 | DeFi | 35.51% |
-| 2 | hype_holder | 200 | Other | 35.34% |
-| 3 | pudgy | 53 | NFT | 9.36% |
-| 4 | azuki | 30 | NFT | 5.3% |
-| 5 | doodles | 30 | NFT | 5.3% |
-| 6 | hypurr | 29 | Other | 5.12% |
-| 7 | yuga | 16 | NFT | 2.83% |
-| 8 | moonbirds | 5 | NFT | 0.88% |
-| 9 | test | 2 | Other | 0.35% |
+| 1 | hype_holder | 200 | Other | 34.31% |
+| 2 | hyperliquid_activity | 200 | DeFi | 34.31% |
+| 3 | pudgy | 57 | NFT | 9.78% |
+| 4 | hypurr | 39 | Other | 6.69% |
+| 5 | azuki | 32 | NFT | 5.49% |
+| 6 | doodles | 30 | NFT | 5.15% |
+| 7 | yuga | 18 | NFT | 3.09% |
+| 8 | moonbirds | 5 | NFT | 0.86% |
+| 9 | test | 2 | Other | 0.34% |
 
 ### Category Breakdown
-- **DeFi:** 201 wallets (35.5%)
-- **NFT:** 134 wallets (23.7%)
-- **Other:** 231 wallets (40.8%)
+- **DeFi:** 200 wallets (34.3%)
+- **NFT:** 142 wallets (24.4%)
+- **Other:** 241 wallets (41.3%)
 
 ## Key Insights
-1. **Top Performer:** The highest engagement comes from the **hyperliquid_activity** collection.
+1. **Top Performer:** The highest engagement comes from the **hype_holder** collection.
 2. **Category Dominance:** **Other** collections currently drive the most user activity.
-3. **Engagement:** Total unique participation is **566** wallets across all tracked campaigns.
+3. **Engagement:** Total unique participation is **583** wallets across all tracked campaigns.
 
 ## Appendix
 - Data source: Fast Protocol API
